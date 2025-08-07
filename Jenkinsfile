@@ -2,34 +2,43 @@ pipeline {
     agent any
 
     stages {
-        stage('Clone Repository') {
+        stage('Clone') {
             steps {
-                git 'https://github.com/YOUR_USERNAME/python-jenkins-ci.git'
+                git url: 'https://github.com/Unkownman06/python-jenkins-ci.git'
             }
         }
 
-        stage('Install Dependencies') {
+        stage('Build') {
             steps {
+                echo 'Installing dependencies...'
                 sh 'pip3 install -r requirements.txt'
             }
         }
 
-        stage('Run Python Code') {
+        stage('Deploy') {
             steps {
+                echo 'Deploying application (e.g., simulate or run script)...'
                 sh 'python3 main.py'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo 'Running unit tests...'
+                sh 'python3 -m unittest test_main.py'
             }
         }
     }
 
     post {
         always {
-            echo 'Pipeline Finished'
+            echo '📦 Pipeline complete'
         }
         success {
-            echo 'SUCCESS ✅'
+            echo '✅ SUCCESS'
         }
         failure {
-            echo 'FAILED ❌'
+            echo '❌ FAILURE'
         }
     }
 }
