@@ -1,2 +1,1 @@
-# For this simple case, it's empty
-# But you can add libs like: numpy, pandas, etc.
+# Add real packages if needed
